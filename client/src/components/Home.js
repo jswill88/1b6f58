@@ -62,10 +62,9 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  const postMessage = (body) => {
+  const postMessage = async (body) => {
     try {
-      const data = saveMessage(body);
-
+      const data = await saveMessage(body);
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
       } else {
@@ -87,14 +86,14 @@ const Home = ({ user, logout }) => {
           convo.id = message.conversationId;
         }
       });
-      setConversations(conversations);
+      setConversations([...conversations]);
     },
     [setConversations, conversations],
   );
   const addMessageToConversation = useCallback(
-    (data) => {
+    async (data) => {
       // if sender isn't null, that means the message needs to be put in a brand new convo
-      const { message, sender = null } = data;
+      const { message, sender = null } = await data;
       if (sender !== null) {
         const newConvo = {
           id: message.conversationId,
@@ -111,7 +110,7 @@ const Home = ({ user, logout }) => {
           convo.latestMessageText = message.text;
         }
       });
-      setConversations(conversations);
+      setConversations([...conversations]);
     },
     [setConversations, conversations],
   );
@@ -182,6 +181,11 @@ const Home = ({ user, logout }) => {
     const fetchConversations = async () => {
       try {
         const { data } = await axios.get("/api/conversations");
+
+        data.forEach(convo => {
+          convo.messages = convo.messages.reverse();
+        });
+        
         setConversations(data);
       } catch (error) {
         console.error(error);
