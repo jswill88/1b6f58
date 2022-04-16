@@ -7,13 +7,19 @@ import {
   Button,
   FormControl,
   TextField,
-  FormHelperText,
+  FormHelperText
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
+import { SideImage, styles } from './index';
+
+const useStyles = makeStyles(styles);
 
 const Signup = ({ user, register }) => {
   const history = useHistory();
 
   const [formErrorMessage, setFormErrorMessage] = useState({});
+
+  const classes = useStyles();
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -36,17 +42,19 @@ const Signup = ({ user, register }) => {
   }, [user, history]);
 
   return (
-    <Grid container justifyContent="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to log in?</Typography>
-          <Link href="/login" to="/login">
-            <Button>Login</Button>
+    <Grid container className={classes.root}>
+      <SideImage />
+      <Box className={classes.formPage}>
+        <Grid container item className={classes.topBar}>
+          <Typography variant="body2">Already have an account?</Typography>
+          <Link href="/login" to="/login" className={classes.switchButtonLink}>
+            <Button variant="outlined">Login</Button>
           </Link>
         </Grid>
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleRegister} className={classes.form}>
           <Grid>
             <Grid>
+              <Typography variant="h3">Create an account.</Typography>
               <FormControl>
                 <TextField
                   aria-label="username"
@@ -54,6 +62,7 @@ const Signup = ({ user, register }) => {
                   name="username"
                   type="text"
                   required
+                  fullWidth
                 />
               </FormControl>
             </Grid>
@@ -65,6 +74,7 @@ const Signup = ({ user, register }) => {
                   type="email"
                   name="email"
                   required
+                  fullWidth
                 />
               </FormControl>
             </Grid>
@@ -77,6 +87,7 @@ const Signup = ({ user, register }) => {
                   inputProps={{ minLength: 6 }}
                   name="password"
                   required
+                  fullWidth
                 />
                 <FormHelperText>
                   {formErrorMessage.confirmPassword}
@@ -84,7 +95,7 @@ const Signup = ({ user, register }) => {
               </FormControl>
             </Grid>
             <Grid>
-              <FormControl error={!!formErrorMessage.confirmPassword}>
+              <FormControl error={!!formErrorMessage.confirmPassword} className={classes.lastChild}>
                 <TextField
                   label="Confirm Password"
                   aria-label="confirm password"
@@ -92,15 +103,18 @@ const Signup = ({ user, register }) => {
                   inputProps={{ minLength: 6 }}
                   name="confirmPassword"
                   required
+                  fullWidth
                 />
                 <FormHelperText>
                   {formErrorMessage.confirmPassword}
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Button type="submit" variant="contained" size="large">
-              Create
-            </Button>
+            <Grid className={classes.buttonCont}>
+              <Button type="submit" variant="contained" size="large">
+                Create
+              </Button>
+            </Grid>
           </Grid>
         </form>
       </Box>

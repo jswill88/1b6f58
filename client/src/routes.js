@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Route, Switch, withRouter } from "react-router-dom";
+import { CssBaseline } from "@material-ui/core";
 
-import Signup from "./Signup.js";
-import Login from "./Login.js";
+import { Signup, Login } from "./components/LandingPage";
 import { SnackbarError, Home } from "./components";
 import { SocketContext, socket } from "./context/socket";
 
@@ -96,6 +96,7 @@ const Routes = (props) => {
           snackBarOpen={snackBarOpen}
         />
       )}
+      <CssBaseline />
       <Switch>
         <Route
           path="/login"

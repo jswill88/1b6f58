@@ -7,10 +7,17 @@ import {
   Button,
   FormControl,
   TextField,
+  InputAdornment
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import { SideImage, styles } from './index';
+
+const useStyles = makeStyles(styles);
 
 const Login = ({ user, login }) => {
   const history = useHistory();
+
+  const classes = useStyles();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -27,18 +34,20 @@ const Login = ({ user, login }) => {
   }, [user, history]);
 
   return (
-    <Grid container justifyContent="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Link href="/register" to="/register">
-            <Button>Register</Button>
+    <Grid container className={classes.root}>
+      <SideImage />
+      <Box className={classes.formPage}>
+        <Grid container item className={classes.topBar}>
+          <Typography variant="body2">Don't have an account?</Typography>
+          <Link href="/register" to="/register" className={classes.switchButtonLink}>
+            <Button variant="outlined">Create account</Button>
           </Link>
         </Grid>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className={classes.form}>
           <Grid>
             <Grid>
-              <FormControl margin="normal" required>
+              <Typography variant="h3" className={classes.signInTitle}>Welcome back!</Typography>
+              <FormControl required>
                 <TextField
                   aria-label="username"
                   label="Username"
@@ -47,15 +56,23 @@ const Login = ({ user, login }) => {
                 />
               </FormControl>
             </Grid>
-            <FormControl margin="normal" required>
+            <FormControl required shrink="false" className={classes.lastChildLogin}>
               <TextField
-                label="password"
+                label="Password"
                 aria-label="password"
                 type="password"
                 name="password"
+                InputProps={{
+                  endAdornment:
+                    <InputAdornment position="end">
+                      <a className={classes.adornment} href="/">
+                        Forgot?
+                      </a>
+                    </InputAdornment>,
+                }}
               />
             </FormControl>
-            <Grid>
+            <Grid className={classes.buttonCont}> 
               <Button type="submit" variant="contained" size="large">
                 Login
               </Button>
