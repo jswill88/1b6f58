@@ -1,18 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
+import { ImageMessage } from './index'
 
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
+    marginBottom: 8,
   },
   date: {
     fontSize: 11,
     color: '#BECCE2',
     fontWeight: 'bold',
-    marginBottom: 5,
   },
   text: {
     fontSize: 14,
@@ -27,15 +28,24 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SenderBubble = ({ time, text }) => {
+const SenderBubble = ({ time, text, attachments, textOnImage }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
-      <Box className={classes.bubble}>
-        <Typography className={classes.text}>{text}</Typography>
-      </Box>
+      {textOnImage(text, attachments) && 
+        <Box className={classes.bubble}>
+          <Typography className={classes.text}>{text}</Typography>
+        </Box>
+      }
+      {!!attachments?.length &&
+        <ImageMessage
+          attachments={attachments}
+          text={text}
+          textOnImage={textOnImage}
+        />
+      }
     </Box>
   );
 };
