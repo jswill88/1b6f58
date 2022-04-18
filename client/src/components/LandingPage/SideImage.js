@@ -5,7 +5,7 @@ import {
   Grid
 } from '@material-ui/core';
 
-import bubble from '../../assets/bubble.svg'
+import { bubble, bgImage } from '../../assets'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,8 +63,8 @@ const SideImage = ({text}) => {
   return (
     <Box className={classes.root}>
       <img
-        src="https://i.ibb.co/T0qkJrM/bg-img.png"
-        alt=''
+        src={bgImage}
+        alt='Friends sitting and laughing'
         aria-hidden='true'
         className={classes.image}
       />

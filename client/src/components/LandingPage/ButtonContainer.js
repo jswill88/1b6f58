@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ButtonCont = ({ children }) => {
+const ButtonContainer = ({ children }) => {
   const classes = useStyles();
 
   return(
@@ -23,4 +23,4 @@ const ButtonCont = ({ children }) => {
   )
 }
 
-export default ButtonCont;
+export default ButtonContainer;

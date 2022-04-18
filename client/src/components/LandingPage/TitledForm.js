@@ -4,7 +4,8 @@ import {
   makeStyles
 } from '@material-ui/core';
 
-import { ButtonCont } from './index';
+import { ButtonContainer } from './index';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.up('sm')] : {
@@ -34,7 +35,7 @@ const TitledForm = ({ children, submitFunction, title, buttonText, titleMargin }
       <Grid>
         <Typography variant="h3" className={classes.title}>{title}</Typography>
         {children}
-        <ButtonCont>{buttonText}</ButtonCont>
+        <ButtonContainer>{buttonText}</ButtonContainer>
     </Grid>
   </form>
   );
