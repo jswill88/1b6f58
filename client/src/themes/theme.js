@@ -20,10 +20,7 @@ export const theme = createTheme({
       fontSize: 26,
       color: '#000',
       lineHeight: 40/26,
-      marginBottom: 17,
-      md: {
-        color: 'red'
-      }
+      marginBottom: 12,
     }
   },
   overrides: {
@@ -32,7 +29,7 @@ export const theme = createTheme({
         fontWeight: 'bold',
       },
       root: {
-        marginBottom: 44,
+        marginBottom: 39,
         '&.MuiInput-underline:before' : {
           borderColor : '#D5DFEE'
         }
@@ -57,7 +54,7 @@ export const theme = createTheme({
       contained: {
         backgroundColor: '#3A8DFF',
         color: '#fff',
-        minWidth: 140,
+        minWidth: 160,
         borderRadius: 3,
         border: '1px solid #3A8Dff',
         boxShadow: 'none',
@@ -73,7 +70,7 @@ export const theme = createTheme({
     },
     MuiInputBase: {
       input: {
-        paddingBottom: 6,
+        paddingBottom: 8,
       }
     },
     MuiInputLabel: {

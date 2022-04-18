@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/styles';
 import {
   Box,
-  Typography
+  Typography,
+  Grid
 } from '@material-ui/core';
 
 import bubble from '../../assets/bubble.svg'
@@ -9,13 +10,12 @@ import bubble from '../../assets/bubble.svg'
 const useStyles = makeStyles((theme) => ({
   root: {
     overflow: 'hidden',
-    height: 300,
-    width: '100%',
-    position: 'relative',
+    display: 'none',
     [theme.breakpoints.up('sm')] : {
       width: 425,
       height: '100vh',
       position: 'sticky',
+      display: 'block',
       top: 0,
       left: 0
     }
@@ -39,13 +39,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translate(-50%, -81%)',
     color: '#fff',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
     rowGap: 40,
-    width: '65%'
+    width: '80%',
+    [theme.breakpoints.up('md')]: {
+      width: '65%'
+    }
   },
   svg: {
     height: 66,
@@ -58,11 +58,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SideImage = () => {
+const SideImage = ({text}) => {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
-
       <img
         src="https://i.ibb.co/T0qkJrM/bg-img.png"
         alt=''
@@ -70,12 +69,16 @@ const SideImage = () => {
         className={classes.image}
       />
       <Box className={classes.overlay}></Box>
-      <Box className={classes.content}> 
-        <img src={bubble} alt='bubble' className={classes.svg}/>
-        <Typography className={classes.text}>
-          Converse with anyone in any language
-        </Typography>
-      </Box>
+      <Grid className={classes.content} direction="column" alignItems="center" container>
+        <Grid item>
+          <img src={bubble} alt='bubble' className={classes.svg}/>
+        </Grid>
+        <Grid item>
+          <Typography className={classes.text}>
+            {text}
+          </Typography>
+        </Grid>
+      </Grid>
     </Box>
   )
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 
-import { Signup, Login } from "./components/LandingPage";
+import { LandingPage } from "./components/LandingPage";
 import { SnackbarError, Home } from "./components";
 import { SocketContext, socket } from "./context/socket";
 
@@ -100,11 +100,11 @@ const Routes = (props) => {
       <Switch>
         <Route
           path="/login"
-          render={() => <Login user={user} login={login} />}
+          render={() => <LandingPage user={user} cb={login} isLogin={true}/>}
         />
         <Route
           path="/register"
-          render={() => <Signup user={user} register={register} />}
+          render={() => <LandingPage user={user} cb={register} isLogin={false} />}
         />
         <Route
           exact
@@ -113,7 +113,7 @@ const Routes = (props) => {
             user?.id ? (
               <Home user={user} logout={logout} />
             ) : (
-              <Signup user={user} register={register} />
+              <LandingPage user={user} cb={register} isLogin={false} />
             )
           }
         />
