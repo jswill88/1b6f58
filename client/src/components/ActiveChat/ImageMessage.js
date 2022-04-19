@@ -42,7 +42,7 @@ const ImageMessage = ({ attachments, text, textOnImage, otherUser }) => {
   const getHeight = () => (!!text.length && attachments.length > 1) ? 110 : 150;
   const makeUrl = image => image.replace(
       '/upload',
-      `/upload/ar_${!!text.length ? `150:${getHeight()}` : '1:1'},c_fill,h_${getHeight()},w_150`
+      `/upload/c_fill,h_${getHeight()},w_150`
     );
 
   return (
